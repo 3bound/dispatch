@@ -1,0 +1,4 @@
+/.phpdoc/
+/vendor/
+composer.phar
+phpDocumentor.phar

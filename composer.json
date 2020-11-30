@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+      "psr-4": {
+        "Dispatch\\": "src/",
+        "Tests\\": "tests/"
+      }
+    }
+}
