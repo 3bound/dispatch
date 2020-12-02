@@ -1,10 +1,10 @@
 # Introduction
 
-This is an outline of a solution for a dispatching batches of shipping consignments for an e-commerce store.
+This is an outline of a solution for dispatching batches of shipping consignments for an e-commerce store.
 
-The intent is to demonstrate OOP architecture, coding standards, tools, testing and documentation.
+The intent is to demonstrate OOP architecture, coding standards, tooling, testing and documentation.
 
-# Usage
+# Installation
 
 ## Build dependencies
 
