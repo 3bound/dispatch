@@ -18,7 +18,7 @@ PHPDOC := phpDocumentor.phar
 
 DOC_INPUTS = $(shell find $(SRC_DIR) -type f -name '*.php')
 
-# Assemble outpute
+# Assemble outputs
 
 DOC_OUTPUT = $(DOC_DIR)/index.html
 
