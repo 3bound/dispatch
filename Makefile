@@ -29,7 +29,7 @@ OUTPUTS = $(VENDOR_DIR) $(DOC_OUTPUT)
 
 # Top level
 
-.PHONY: all test doc
+.PHONY: all test doc dep
 
 all: $(OUTPUTS)
 	@echo > /dev/null
