@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Dispatch\Domain\Consignment\Consignment;

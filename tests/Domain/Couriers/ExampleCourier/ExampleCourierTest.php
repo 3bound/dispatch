@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Couriers;
+namespace Tests\Domain\Couriers;
 
 use PHPUnit\Framework\TestCase;
 use Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier;
