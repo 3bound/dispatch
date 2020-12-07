@@ -62,7 +62,7 @@ class Batch
                 . $consignment->getCourierName());
         }
 
-        $this->consignments[] = $consignment;
+        $this->consignments[$consignment->getCourierName()][$consignment->getConsignmentId()] = $consignment;
     }
 
 
@@ -120,15 +120,11 @@ class Batch
             throw new \InvalidArgumentException("Trying to get consignments with an empty courier name");
         }
 
-        $filteredConsignments = [];
-
-        foreach ($this->consignments as $consignment) {
-            if ($consignment->getCourierName() === $name) {
-                $filteredConsignments[] = $consignment;
-            }
+        if (!isset($this->consignments[$name])) {
+            return [];
         }
 
-        return $filteredConsignments;
+        return $this->consignments[$name];
     }
 
 
@@ -157,17 +153,12 @@ class Batch
     private function isDuplicate(Consignment $candidateConsignment): bool
     {
         $candidateId = $candidateConsignment->getConsignmentId();
-        $candidateName = $candidateConsignment->getCourierName();
+        $courierName = $candidateConsignment->getCourierName();
 
-        foreach ($this->consignments as $consignment) {
-            if (
-                $consignment->getConsignmentId() === $candidateId
-                && $consignment->getCourierName() === $candidateName
-            ) {
-                return true;
-            }
+        if (!isset($this->consignments[$courierName])) {
+            return false;
         }
 
-        return false;
+        return isset($this->consignments[$courierName][$candidateId]);
     }
 }

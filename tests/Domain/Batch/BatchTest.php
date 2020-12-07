@@ -69,9 +69,9 @@ final class BatchTest extends TestCase
 
         $batch = new Batch();
         $batch->addConsignment($consignment);
-        $expected = [$consignment];
+        $expected = ['Example' => ['A12345' => $consignment]];
         $result = $batch->getAllConsignments();
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
     }
 
 
@@ -101,9 +101,12 @@ final class BatchTest extends TestCase
         $batch = new Batch();
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
-        $expected = [$consignment1, $consignment2];
+        $expected = [
+            'Example 1' => ['A12345' => $consignment1],
+            'Example 2' => ['B6789' => $consignment2]
+        ];
         $result = $batch->getAllConsignments();
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
     }
 
 
@@ -235,7 +238,10 @@ final class BatchTest extends TestCase
         $batch = new Batch();
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
-        $expected = [$consignment1, $consignment2];
+        $expected = [
+            'Example 1' => ['A12345' => $consignment1],
+            'Example 2' => ['A12345' => $consignment2]
+        ];
         $result = $batch->getAllConsignments();
         $this->assertSame($expected, $result);
     }
@@ -267,7 +273,9 @@ final class BatchTest extends TestCase
         $batch = new Batch();
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
-        $expected = [$consignment1, $consignment2];
+        $expected = [
+            'Example' => ['A12345' => $consignment1, 'B12345' => $consignment2]
+        ];
         $result = $batch->getAllConsignments();
         $this->assertSame($expected, $result);
     }
@@ -314,7 +322,10 @@ final class BatchTest extends TestCase
         $batch = new Batch();
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
-        $expected = [$consignment1, $consignment2];
+        $expected = [
+            'Example 1' => ['A12345' => $consignment1],
+            'Example 2' => ['B12345' => $consignment2]
+        ];
         $result = $batch->getAllConsignments();
         $this->assertSame($expected, $result);
     }
@@ -441,7 +452,7 @@ final class BatchTest extends TestCase
         $batch->addConsignment($consignment2);
         $batch->addConsignment($consignment3);
         $batch->addConsignment($consignment4);
-        $expected = [$consignment1, $consignment3];
+        $expected = ['A12345' => $consignment1, 'C12345' => $consignment3];
         $result = $batch->getConsignmentsByCourierName('Example 1');
         $this->assertSame($expected, $result);
     }
@@ -572,7 +583,7 @@ final class BatchTest extends TestCase
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
         $batch->addConsignment($consignment3);
-        $expected = [$consignment1, $consignment3];
+        $expected = ['A12345' => $consignment1, 'C12345' => $consignment3];
         $result = $batch->getConsignmentsByCourier($courier);
         $this->assertSame($expected, $result);
     }
