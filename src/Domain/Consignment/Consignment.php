@@ -1,6 +1,6 @@
 <?php
 
-namespace Dispatch\Consignment;
+namespace Dispatch\Domain\Consignment;
 
 /**
  * A shipping consignment
@@ -22,7 +22,7 @@ class Consignment
     /**
      * The courier assigned to this consignment
      *
-     * @var \Dispatch\Couriers\CourierInterface
+     * @var \Dispatch\Domain\Couriers\CourierInterface
      *
      */
     private $courier;
@@ -37,10 +37,10 @@ class Consignment
 
 
     /**
-     * @param \Dispatch\Couriers\CourierInterface
+     * @param \Dispatch\Domain\Couriers\CourierInterface
      *
      */
-    public function __construct(\Dispatch\Couriers\CourierInterface $courier)
+    public function __construct(\Dispatch\Domain\Couriers\CourierInterface $courier)
     {
         $this->courier = $courier;
         $this->setConsignmentId($this->courier->generateConsignmentId());
@@ -117,10 +117,10 @@ class Consignment
     /**
      * Get the courier
      *
-     * @return \Dispatch\Couriers\CourierInterface
+     * @return \Dispatch\Domain\Couriers\CourierInterface
      *
      */
-    public function getCourier(): \Dispatch\Couriers\CourierInterface
+    public function getCourier(): \Dispatch\Domain\Couriers\CourierInterface
     {
         return $this->courier;
     }

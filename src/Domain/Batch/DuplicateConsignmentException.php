@@ -1,6 +1,6 @@
 <?php
 
-namespace Dispatch\Batch;
+namespace Dispatch\Domain\Batch;
 
 /**
  * Illegal batch operations on duplicate consignments

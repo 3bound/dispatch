@@ -1,14 +1,14 @@
 <?php
 
-namespace Dispatch\Couriers\ExampleCourier;
+namespace Dispatch\Domain\Couriers\ExampleCourier;
 
 /**
  * An example implementation of a courier
  *
- * @implements Dispatch\Couriers\CourierInterface
+ * @implements Dispatch\Domain\Couriers\CourierInterface
  *
  */
-class ExampleCourier implements \Dispatch\Couriers\CourierInterface
+class ExampleCourier implements \Dispatch\Domain\Couriers\CourierInterface
 {
     /**
      * The courier name

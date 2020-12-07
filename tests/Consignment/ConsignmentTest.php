@@ -3,8 +3,8 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Dispatch\Consignment\Consignment;
-use Dispatch\Couriers\ExampleCourier\ExampleCourier;
+use Dispatch\Domain\Consignment\Consignment;
+use Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier;
 
 final class ConsignmentTest extends TestCase
 {

@@ -3,11 +3,11 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Dispatch\Batch\Batch;
-use Dispatch\Batch\BatchClosedException;
-use Dispatch\Batch\DuplicateConsignmentException;
-use Dispatch\Consignment\Consignment;
-use Dispatch\Couriers\ExampleCourier\ExampleCourier;
+use Dispatch\Domain\Batch\Batch;
+use Dispatch\Domain\Batch\BatchClosedException;
+use Dispatch\Domain\Batch\DuplicateConsignmentException;
+use Dispatch\Domain\Consignment\Consignment;
+use Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier;
 
 final class BatchTest extends TestCase
 {
@@ -457,7 +457,7 @@ final class BatchTest extends TestCase
         $consignment1->method('getConsignmentId')->willReturn('A12345');
         $consignment1->method('getCourierName')->willReturn('Example 1');
 
-        $courier = $this->getMockBuilder(\Dispatch\Couriers\ExampleCourier\ExampleCourier::class)
+        $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
                         ->disableOriginalConstructor()
                         ->setMethods(['getName'])
                         ->getMock();
@@ -479,7 +479,7 @@ final class BatchTest extends TestCase
      */
     public function testGetConsignmentsByCourierFromEmptyBatch(): void
     {
-        $courier = $this->getMockBuilder(\Dispatch\Couriers\ExampleCourier\ExampleCourier::class)
+        $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
                         ->disableOriginalConstructor()
                         ->setMethods(['getName'])
                         ->getMock();
@@ -509,7 +509,7 @@ final class BatchTest extends TestCase
         $consignment1->method('getConsignmentId')->willReturn('A12345');
         $consignment1->method('getCourierName')->willReturn('Example 1');
 
-        $courier = $this->getMockBuilder(\Dispatch\Couriers\ExampleCourier\ExampleCourier::class)
+        $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
                         ->disableOriginalConstructor()
                         ->setMethods(['getName'])
                         ->getMock();
@@ -554,7 +554,7 @@ final class BatchTest extends TestCase
         $consignment3->method('getConsignmentId')->willReturn('C12345');
         $consignment3->method('getCourierName')->willReturn('Example 1');
 
-        $courier = $this->getMockBuilder(\Dispatch\Couriers\ExampleCourier\ExampleCourier::class)
+        $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
                         ->disableOriginalConstructor()
                         ->setMethods(['getName'])
                         ->getMock();

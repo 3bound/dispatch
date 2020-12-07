@@ -1,6 +1,6 @@
 <?php
 
-namespace Dispatch\Couriers;
+namespace Dispatch\Domain\Couriers;
 
 /**
  * A courier for shipping consignments

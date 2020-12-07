@@ -1,6 +1,6 @@
 <?php
 
-namespace Dispatch\Batch;
+namespace Dispatch\Domain\Batch;
 
 /**
  * An illegal operation on a closed batch

@@ -3,7 +3,7 @@
 namespace Tests\Couriers;
 
 use PHPUnit\Framework\TestCase;
-use Dispatch\Couriers\ExampleCourier\ExampleCourier;
+use Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier;
 
 final class ExampleCourierTest extends TestCase
 {
