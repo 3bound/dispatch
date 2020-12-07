@@ -2,10 +2,10 @@
 
 namespace Dispatch\Domain\Couriers;
 
-use Dispatch\Domain\Order\Order;
+use Dispatch\Domain\Order\OrderInterface;
 
 /**
- * A courier for shipping consignments
+ * A courier interface for shipping consignments
  *
  */
 interface CourierInterface
@@ -13,13 +13,13 @@ interface CourierInterface
     /**
      * Generate a unique consignment identifier
      *
-     * @param Order $order
+     * @param OrderInterface $order
      * @return string
      *
      * @throws \InvalidArgumentException
      *
      */
-    public function generateConsignmentId(Order $order): string;
+    public function generateConsignmentId(OrderInterface $order): string;
 
     /**
      * Get the courier name

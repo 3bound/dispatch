@@ -5,8 +5,10 @@ namespace Dispatch\Domain\Order;
 /**
  * A stub implementation of an Order
  *
+ * @implements OrderInterface
+ *
  */
-class Order
+class Order implements OrderInterface
 {
     /**
      * The order ID

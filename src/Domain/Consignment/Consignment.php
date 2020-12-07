@@ -3,7 +3,7 @@
 namespace Dispatch\Domain\Consignment;
 
 use Dispatch\Domain\Couriers\CourierInterface;
-use Dispatch\Domain\Order\Order;
+use Dispatch\Domain\Order\OrderInterface;
 
 /**
  * A shipping consignment
@@ -41,18 +41,18 @@ class Consignment
     /**
      * The order
      *
-     * @var Order
+     * @var OrderInterface
      *
      */
     private $order;
 
 
     /**
-     * @param Order $order
+     * @param OrderInterface $order
      * @param CourierInterface $courier
      *
      */
-    public function __construct(Order $order, CourierInterface $courier)
+    public function __construct(OrderInterface $order, CourierInterface $courier)
     {
         $this->courier = $courier;
         $this->order = $order;
@@ -138,10 +138,10 @@ class Consignment
     /**
      * Get the order
      *
-     * @return Order
+     * @return OrderInterface
      *
      */
-    public function getOrder(): Order
+    public function getOrder(): OrderInterface
     {
         return $this->order;
     }

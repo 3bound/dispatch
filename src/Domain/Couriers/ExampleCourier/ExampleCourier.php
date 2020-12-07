@@ -2,7 +2,7 @@
 
 namespace Dispatch\Domain\Couriers\ExampleCourier;
 
-use Dispatch\Domain\Order\Order;
+use Dispatch\Domain\Order\OrderInterface;
 use Dispatch\Domain\Couriers\CourierInterface;
 
 /**
@@ -23,11 +23,11 @@ class ExampleCourier implements CourierInterface
     /**
      * Generate a unique consignment identifier
      *
-     * @param Order $order
+     * @param OrderInterface $order
      * @return string
      *
      */
-    public function generateConsignmentId(Order $order): string
+    public function generateConsignmentId(OrderInterface $order): string
     {
         $nanoseconds = (string)hrtime(true);
         $orderId = $order->getId();
