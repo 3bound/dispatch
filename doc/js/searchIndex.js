@@ -1,70 +1,75 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\Dispatch\\Batch\\Batch",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch",
             "name": "Batch",
             "summary": "A\u0020batch\u0020of\u0020shipping\u0020consignments",
-            "url": "classes/Dispatch-Batch-Batch.html"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003AaddConsignment\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003AaddConsignment\u0028\u0029",
             "name": "addConsignment",
             "summary": "Add\u0020a\u0020consignment\u0020to\u0020the\u0020batch",
-            "url": "classes/Dispatch-Batch-Batch.html#method_addConsignment"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_addConsignment"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003Aclose\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003Aclose\u0028\u0029",
             "name": "close",
             "summary": "Close\u0020the\u0020consignment",
-            "url": "classes/Dispatch-Batch-Batch.html#method_close"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_close"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003AgetAllConsignments\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003AgetAllConsignments\u0028\u0029",
             "name": "getAllConsignments",
             "summary": "Get\u0020all\u0020consignments",
-            "url": "classes/Dispatch-Batch-Batch.html#method_getAllConsignments"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_getAllConsignments"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003AgetConsignmentsByCourier\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003AgetConsignmentsByCourier\u0028\u0029",
             "name": "getConsignmentsByCourier",
             "summary": "Get\u0020all\u0020consignments\u0020assigned\u0020to\u0020the\u0020given\u0020courier\u0020object",
-            "url": "classes/Dispatch-Batch-Batch.html#method_getConsignmentsByCourier"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_getConsignmentsByCourier"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003AgetConsignmentsByCourierName\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003AgetConsignmentsByCourierName\u0028\u0029",
             "name": "getConsignmentsByCourierName",
             "summary": "Get\u0020all\u0020consignments\u0020assigned\u0020to\u0020the\u0020named\u0020courier",
-            "url": "classes/Dispatch-Batch-Batch.html#method_getConsignmentsByCourierName"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_getConsignmentsByCourierName"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003A\u0024isClosed",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003A\u0024isClosed",
             "name": "isClosed",
             "summary": "Represents\u0020the\u0020batch\u0020open\/closed\u0020state",
-            "url": "classes/Dispatch-Batch-Batch.html#property_isClosed"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#property_isClosed"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003AisDuplicate\u0028\u0029",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003AisDuplicate\u0028\u0029",
             "name": "isDuplicate",
             "summary": "Check\u0020if\u0020a\u0020consignment\u0020is\u0020a\u0020duplicate",
-            "url": "classes/Dispatch-Batch-Batch.html#method_isDuplicate"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#method_isDuplicate"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\Batch\u003A\u003A\u0024consignments",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\Batch\u003A\u003A\u0024consignments",
             "name": "consignments",
             "summary": "The\u0020consignments\u0020in\u0020the\u0020batch",
-            "url": "classes/Dispatch-Batch-Batch.html#property_consignments"
+            "url": "classes/Dispatch-Domain-Batch-Batch.html#property_consignments"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\BatchClosedException",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\BatchClosedException",
             "name": "BatchClosedException",
             "summary": "An\u0020illegal\u0020operation\u0020on\u0020a\u0020closed\u0020batch",
-            "url": "classes/Dispatch-Batch-BatchClosedException.html"
+            "url": "classes/Dispatch-Domain-Batch-BatchClosedException.html"
         },                {
-            "fqsen": "\\Dispatch\\Batch\\DuplicateConsignmentException",
+            "fqsen": "\\Dispatch\\Domain\\Batch\\DuplicateConsignmentException",
             "name": "DuplicateConsignmentException",
             "summary": "Illegal\u0020batch\u0020operations\u0020on\u0020duplicate\u0020consignments",
-            "url": "classes/Dispatch-Batch-DuplicateConsignmentException.html"
+            "url": "classes/Dispatch-Domain-Batch-DuplicateConsignmentException.html"
         },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\Dispatch\\Batch",
+            "fqsen": "\\Dispatch\\Domain\\Batch",
             "name": "Batch",
             "summary": "",
-            "url": "namespaces/dispatch-batch.html"
+            "url": "namespaces/dispatch-domain-batch.html"
+        },                {
+            "fqsen": "\\Dispatch\\Domain",
+            "name": "Domain",
+            "summary": "",
+            "url": "namespaces/dispatch-domain.html"
         },                {
             "fqsen": "\\Dispatch",
             "name": "Dispatch",
