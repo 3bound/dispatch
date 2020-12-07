@@ -4,6 +4,7 @@ namespace Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Dispatch\Domain\Consignment\Consignment;
+use Dispatch\Domain\Order\Order;
 use Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier;
 
 final class ConsignmentTest extends TestCase
@@ -22,9 +23,16 @@ final class ConsignmentTest extends TestCase
         $courier->method('generateConsignmentId')->willReturn('A12345');
         $courier->method('getName')->willReturn('Example');
 
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
         $this->assertInstanceOf(
             Consignment::class,
-            new Consignment($courier)
+            new Consignment($order, $courier)
         );
     }
 
@@ -37,6 +45,8 @@ final class ConsignmentTest extends TestCase
      */
     public function testCannotInstantiateWithEmptyConsignmentId(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $courier = $this->getMockBuilder(ExampleCourier::class)
                         ->setMethods(['generateConsignmentId'])
                         ->setMethods(['getName'])
@@ -45,8 +55,14 @@ final class ConsignmentTest extends TestCase
         $courier->method('generateConsignmentId')->willReturn('');
         $courier->method('getName')->willReturn('Example');
 
-        $this->expectException(\InvalidArgumentException::class);
-        new Consignment($courier);
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
+        new Consignment($order, $courier);
     }
 
 
@@ -58,6 +74,8 @@ final class ConsignmentTest extends TestCase
      */
     public function testCannotInstantiateWithEmptyCourierName(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $courier = $this->getMockBuilder(ExampleCourier::class)
                         ->setMethods(['generateConsignmentId'])
                         ->setMethods(['getName'])
@@ -66,8 +84,14 @@ final class ConsignmentTest extends TestCase
         $courier->method('generateConsignmentId')->willReturn('A12345');
         $courier->method('getName')->willReturn('');
 
-        $this->expectException(\InvalidArgumentException::class);
-        new Consignment($courier);
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
+        new Consignment($order, $courier);
     }
 
 
@@ -83,10 +107,17 @@ final class ConsignmentTest extends TestCase
                         ->setMethods(['generateConsignmentId'])
                         ->getMock();
 
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
         $expected = 'A12345';
         $courier->method('generateConsignmentId')->willReturn($expected);
-        $consignment = new Consignment($courier);
-        $result = $consignment->getConsignmentId();
+        $consignment = new Consignment($order, $courier);
+        $result = $consignment->getId();
         $this->assertEquals($expected, $result);
     }
 
@@ -103,9 +134,16 @@ final class ConsignmentTest extends TestCase
                         ->setMethods(['getName'])
                         ->getMock();
 
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
         $expected = 'Example';
         $courier->method('getName')->willReturn($expected);
-        $consignment = new Consignment($courier);
+        $consignment = new Consignment($order, $courier);
         $result = $consignment->getCourierName();
         $this->assertEquals($expected, $result);
     }
@@ -125,8 +163,42 @@ final class ConsignmentTest extends TestCase
 
         $courier->method('getName')->willReturn('Example');
 
-        $consignment = new Consignment($courier);
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
+        $consignment = new Consignment($order, $courier);
         $result = $consignment->getCourier();
         $this->assertEquals($courier, $result);
+    }
+
+
+    /**
+     * Get the order
+     *
+     * @depends testCanBeInstantiated
+     *
+     */
+    public function testGetOrder(): void
+    {
+        $courier = $this->getMockBuilder(ExampleCourier::class)
+                        ->setMethods(['getName'])
+                        ->getMock();
+
+        $courier->method('getName')->willReturn('Example');
+
+        $order = $this->getMockBuilder(Order::class)
+                        ->setMethods(['getId'])
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $order->method('getId')->willReturn('AA01');
+
+        $consignment = new Consignment($order, $courier);
+        $result = $consignment->getOrder();
+        $this->assertEquals($order, $result);
     }
 }

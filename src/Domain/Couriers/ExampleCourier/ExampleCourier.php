@@ -2,13 +2,16 @@
 
 namespace Dispatch\Domain\Couriers\ExampleCourier;
 
+use Dispatch\Domain\Order\Order;
+use Dispatch\Domain\Couriers\CourierInterface;
+
 /**
  * An example implementation of a courier
  *
- * @implements Dispatch\Domain\Couriers\CourierInterface
+ * @implements CourierInterface
  *
  */
-class ExampleCourier implements \Dispatch\Domain\Couriers\CourierInterface
+class ExampleCourier implements CourierInterface
 {
     /**
      * The courier name
@@ -16,26 +19,21 @@ class ExampleCourier implements \Dispatch\Domain\Couriers\CourierInterface
      */
     private const NAME = 'Example';
 
-    /**
-     * Internal index for generating consignment IDs
-     *
-     * @var integer
-     *
-     */
-    private $index = 0;
-
 
     /**
      * Generate a unique consignment identifier
      *
+     * @param Order $order
      * @return string
      *
      */
-    public function generateConsignmentId(): string
+    public function generateConsignmentId(Order $order): string
     {
-        $this->index += 1;
+        $nanoseconds = (string)hrtime(true);
+        $orderId = $order->getId();
+        $consignmentId = base64_encode($nanoseconds . $orderId . random_bytes(8));
 
-        return (string)$this->index;
+        return $consignmentId;
     }
 
 

@@ -2,6 +2,9 @@
 
 namespace Dispatch\Domain\Batch;
 
+use Dispatch\Domain\Consignment\Consignment;
+use Dispatch\Domain\Couriers\CourierInterface;
+
 /**
  * A batch of shipping consignments
  *
@@ -11,7 +14,7 @@ class Batch
     /**
      * The consignments in the batch
      *
-     * @var \Dispatch\Domain\Consignment\Consignment[]
+     * @var array
      *
      */
     private $consignments = [];
@@ -30,15 +33,15 @@ class Batch
      *
      * Consignments are rejected if the consignment is a duplicate or if the batch has been closed
      *
-     * @param \Dispatch\Domain\Consignment\Consignment $consignment
-     * @return Batch
+     * @param Consignment $consignment
+     * @return void
      *
      * @throws BatchClosedException
      * @throws DuplicateConsignmentException
      * @throws InvalidArgumentException
      *
      */
-    public function addConsignment(\Dispatch\Domain\Consignment\Consignment $consignment): Batch
+    public function addConsignment(Consignment $consignment): void
     {
         if ($this->isClosed()) {
             throw new BatchClosedException("Trying to add a consignment to a closed batch");
@@ -60,29 +63,25 @@ class Batch
         }
 
         $this->consignments[] = $consignment;
-
-        return $this;
     }
 
 
     /**
      * Close the consignment
      *
-     * @return Batch
+     * @return void
      *
      */
-    public function close(): Batch
+    public function close(): void
     {
         $this->isClosed = true;
-
-        return $this;
     }
 
 
     /**
      * Get all consignments
      *
-     * @return \Dispatch\Domain\Consignment\Consignment[]
+     * @return array
      *
      */
     public function getAllConsignments(): array
@@ -94,13 +93,13 @@ class Batch
     /**
      * Get all consignments assigned to the given courier object
      *
-     * @param \Dispatch\Domain\Couriers\CourierInterface $courier
-     * @return \Dispatch\Domain\Consignment\Consignment[]
+     * @param CourierInterface $courier
+     * @return array
      *
      * @throws InvalidArgumentException
      *
      */
-    public function getConsignmentsByCourier(\Dispatch\Domain\Couriers\CourierInterface $courier): array
+    public function getConsignmentsByCourier(CourierInterface $courier): array
     {
         return $this->getConsignmentsByCourierName($courier->getName());
     }
@@ -110,7 +109,7 @@ class Batch
      * Get all consignments assigned to the named courier
      *
      * @param string $name
-     * @return \Dispatch\Domain\Consignment\Consignment[]
+     * @return array
      *
      * @throws InvalidArgumentException
      *
@@ -151,11 +150,11 @@ class Batch
      * Checks if the batch has a consignment with the same courier name and consignment ID.
      * This is done before adding a consignment to the batch.
      *
-     * @param \Dispatch\Domain\Consignment\Consignment $candidateConsignment
+     * @param Consignment $candidateConsignment
      * @return bool
      *
      */
-    private function isDuplicate(\Dispatch\Domain\Consignment\Consignment $candidateConsignment): bool
+    private function isDuplicate(Consignment $candidateConsignment): bool
     {
         $candidateId = $candidateConsignment->getConsignmentId();
         $candidateName = $candidateConsignment->getCourierName();

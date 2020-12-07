@@ -60,8 +60,8 @@ final class BatchTest extends TestCase
     public function testAddConsignmentToEmptyBatch(): void
     {
         $consignment = $this->getMockBuilder(Consignment::class)
-                            ->disableOriginalConstructor()
                             ->setMethods(['getConsignmentId', 'getCourierName'])
+                            ->disableOriginalConstructor()
                             ->getMock();
 
         $consignment->method('getConsignmentId')->willReturn('A12345');
@@ -84,13 +84,13 @@ final class BatchTest extends TestCase
     public function testAddConsignmentToNonEmptyBatch(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -99,7 +99,8 @@ final class BatchTest extends TestCase
         $consignment2->method('getCourierName')->willReturn('Example 2');
 
         $batch = new Batch();
-        $batch->addConsignment($consignment1)->addConsignment($consignment2);
+        $batch->addConsignment($consignment1);
+        $batch->addConsignment($consignment2);
         $expected = [$consignment1, $consignment2];
         $result = $batch->getAllConsignments();
         $this->assertEquals($expected, $result);
@@ -115,9 +116,11 @@ final class BatchTest extends TestCase
      */
     public function testClosedBatchRejectsNewConsignments(): void
     {
+        $this->expectException(BatchClosedException::class);
+
         $consignment = $this->getMockBuilder(Consignment::class)
-                            ->disableOriginalConstructor()
                             ->setMethods(['getConsignmentId', 'getCourierName'])
+                            ->disableOriginalConstructor()
                             ->getMock();
 
         $consignment->method('getConsignmentId')->willReturn('A12345');
@@ -125,7 +128,6 @@ final class BatchTest extends TestCase
 
         $batch = new Batch();
         $batch->close();
-        $this->expectException(BatchClosedException::class);
         $batch->addConsignment($consignment);
     }
 
@@ -138,16 +140,17 @@ final class BatchTest extends TestCase
      */
     public function testRejectConsignmentWithEmptyCourierName(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $consignment = $this->getMockBuilder(Consignment::class)
-                            ->disableOriginalConstructor()
                             ->setMethods(['getConsignmentId', 'getCourierName'])
+                            ->disableOriginalConstructor()
                             ->getMock();
 
         $consignment->method('getConsignmentId')->willReturn('A12345');
         $consignment->method('getCourierName')->willReturn('');
 
         $batch = new Batch();
-        $this->expectException(\InvalidArgumentException::class);
         $batch->addConsignment($consignment);
     }
 
@@ -160,16 +163,17 @@ final class BatchTest extends TestCase
      */
     public function testRejectConsignmentWithEmptyId(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $consignment = $this->getMockBuilder(Consignment::class)
-                            ->disableOriginalConstructor()
                             ->setMethods(['getConsignmentId', 'getCourierName'])
+                            ->disableOriginalConstructor()
                             ->getMock();
 
         $consignment->method('getConsignmentId')->willReturn('');
         $consignment->method('getCourierName')->willReturn('Example');
 
         $batch = new Batch();
-        $this->expectException(\InvalidArgumentException::class);
         $batch->addConsignment($consignment);
     }
 
@@ -182,14 +186,16 @@ final class BatchTest extends TestCase
      */
     public function testRejectDuplicateConsignments(): void
     {
+        $this->expectException(DuplicateConsignmentException::class);
+
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -198,7 +204,6 @@ final class BatchTest extends TestCase
         $consignment2->method('getCourierName')->willReturn('Example');
 
         $batch = new Batch();
-        $this->expectException(DuplicateConsignmentException::class);
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
     }
@@ -213,13 +218,13 @@ final class BatchTest extends TestCase
     public function testAcceptConsignmentWithDuplicateIdAndDifferentCourier(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -245,13 +250,13 @@ final class BatchTest extends TestCase
     public function testAcceptConsignmentWithDuplicateCourierAndDifferentId(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -292,13 +297,13 @@ final class BatchTest extends TestCase
     public function testGetAllConsignments(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -336,16 +341,18 @@ final class BatchTest extends TestCase
      * @depends testAddConsignmentToNonEmptyBatch
      *
      */
-    public function testGetConsignmentsByCourierNameEmptyString(): void
+    public function testCannotGetConsignmentsByCourierNameWhenCourierNameEmpty(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -356,7 +363,6 @@ final class BatchTest extends TestCase
         $batch = new Batch();
         $batch->addConsignment($consignment1);
         $batch->addConsignment($consignment2);
-        $this->expectException(\InvalidArgumentException::class);
         $result = $batch->getConsignmentsByCourierName('');
     }
 
@@ -370,13 +376,13 @@ final class BatchTest extends TestCase
     public function testGetConsignmentsByCourierNameNoMatchFound(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -402,23 +408,23 @@ final class BatchTest extends TestCase
     public function testGetConsignmentsByCourierNameReturnsMatches(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment3 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment4 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -447,26 +453,27 @@ final class BatchTest extends TestCase
      * @depends testAddConsignmentToEmptyBatch
      *
      */
-    public function testGetConsignmentsByCourierWhenCourierNameEmpty(): void
+    public function testCannotGetConsignmentsByCourierWhenCourierNameEmpty(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
         $consignment1->method('getCourierName')->willReturn('Example 1');
 
         $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
-                        ->disableOriginalConstructor()
                         ->setMethods(['getName'])
+                        ->disableOriginalConstructor()
                         ->getMock();
 
         $courier->method('getName')->willReturn('');
 
         $batch = new Batch();
         $batch->addConsignment($consignment1);
-        $this->expectException(\InvalidArgumentException::class);
         $result = $batch->getConsignmentsByCourier($courier);
     }
 
@@ -480,8 +487,8 @@ final class BatchTest extends TestCase
     public function testGetConsignmentsByCourierFromEmptyBatch(): void
     {
         $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
-                        ->disableOriginalConstructor()
                         ->setMethods(['getName'])
+                        ->disableOriginalConstructor()
                         ->getMock();
 
         $courier->method('getName')->willReturn('Example');
@@ -502,16 +509,16 @@ final class BatchTest extends TestCase
     public function testGetConsignmentsByCourierNoMatchesFound(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
         $consignment1->method('getCourierName')->willReturn('Example 1');
 
         $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
-                        ->disableOriginalConstructor()
                         ->setMethods(['getName'])
+                        ->disableOriginalConstructor()
                         ->getMock();
 
         $courier->method('getName')->willReturn('Example 2');
@@ -533,18 +540,18 @@ final class BatchTest extends TestCase
     public function testGetConsignmentsByCourierFindsMatches(): void
     {
         $consignment1 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment2 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment3 = $this->getMockBuilder(Consignment::class)
-                             ->disableOriginalConstructor()
                              ->setMethods(['getConsignmentId', 'getCourierName'])
+                             ->disableOriginalConstructor()
                              ->getMock();
 
         $consignment1->method('getConsignmentId')->willReturn('A12345');
@@ -555,8 +562,8 @@ final class BatchTest extends TestCase
         $consignment3->method('getCourierName')->willReturn('Example 1');
 
         $courier = $this->getMockBuilder(\Dispatch\Domain\Couriers\ExampleCourier\ExampleCourier::class)
-                        ->disableOriginalConstructor()
                         ->setMethods(['getName'])
+                        ->disableOriginalConstructor()
                         ->getMock();
 
         $courier->method('getName')->willReturn('Example 1');
